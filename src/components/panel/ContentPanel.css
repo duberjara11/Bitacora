@@ -1,0 +1,41 @@
+.content-panel {
+  position: absolute;
+  right: 28px;
+  bottom: 28px;
+  z-index: 50;
+  width: min(620px, calc(100vw - 56px));
+  max-height: min(84vh, 820px);
+  overflow-y: auto;
+  padding: 42px;
+  color: #f7eee4;
+  background: rgba(14, 15, 33, 0.84);
+  border-left: 2px solid #e58d78;
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(16px);
+  animation: panel-in 500ms cubic-bezier(.2,.8,.2,1) both;
+}
+
+.panel-topline { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.panel-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  color: #f0c4a6;
+  background: transparent;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.panel-kicker { color: #f0c4a6; font: 700 11px 'Courier New', monospace; letter-spacing: 2px; }
+.panel-chapter { display: block; color: #a49baa; font: 11px 'Courier New', monospace; letter-spacing: 1px; }
+.content-panel h2 { margin: 14px 0 18px; color: #fff1df; font: 400 48px/1 Georgia, serif; }
+.content-panel p { margin: 0; color: #c5becc; font: 17px/1.65 'DM Sans', sans-serif; }
+.panel-purpose { max-width: 490px; color: #e0c2b2 !important; font-size: 19px !important; }
+.panel-divider { height: 1px; margin: 30px 0; background: rgba(240,196,166,.22); }
+.panel-photo, .panel-placeholder { width: 100%; aspect-ratio: 16 / 9; margin-bottom: 20px; object-fit: cover; }
+.panel-placeholder { display: grid; place-items: center; color: #a49baa; background: rgba(255,255,255,.06); font: 10px 'Courier New', monospace; letter-spacing: 1px; }
+.panel-field { margin-top: 4px; }.panel-field > span { display: block; margin-bottom: 8px; color: #f0c4a6; font: 700 10px 'Courier New', monospace; letter-spacing: 1.5px; text-transform: uppercase; }
+.panel-checklist { display: grid; gap: 10px; margin-top: 30px; }.panel-check { display: grid; grid-template-columns: 9px 1fr auto; gap: 10px; align-items: center; padding: 12px 0; color: #d5ccd2; border-top: 1px solid rgba(255,255,255,.12); font-size: 14px; }.panel-check i { width: 7px; height: 7px; border: 1px solid #e58d78; border-radius: 50%; }.panel-check b { color: #8f8696; font: 9px 'Courier New', monospace; letter-spacing: 1px; }
+@keyframes panel-in { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 600px) { .content-panel { right: 16px; bottom: 16px; left: 16px; width: auto; max-height: 76vh; padding: 28px; }.content-panel h2 { font-size: 34px; }.panel-purpose { font-size: 16px !important; } }

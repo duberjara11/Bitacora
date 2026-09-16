@@ -1,0 +1,730 @@
+/* OVERLAY Y CONTENEDOR GENERAL */
+.book-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: book-fade-in 350ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.book-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 7, 18, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  cursor: pointer;
+}
+
+/* PLIEGO CENTRAL DEL LIBRO */
+.book-spread {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1140px;
+  max-height: 88vh;
+  background: #101222;
+  border-radius: 12px;
+  border: 1px solid rgba(245, 158, 11, 0.28);
+  box-shadow:
+    0 30px 100px rgba(0, 0, 0, 0.8),
+    0 0 60px rgba(245, 158, 11, 0.08),
+    inset 0 0 20px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+
+/* LOMO DEL LIBRO (Eje central) */
+.book-spine {
+  position: absolute;
+  top: 56px;
+  bottom: 64px;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(245, 158, 11, 0.2) 20%,
+    rgba(245, 158, 11, 0.4) 50%,
+    rgba(245, 158, 11, 0.2) 80%,
+    transparent
+  );
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+  z-index: 5;
+}
+
+/* CABECERA DEL PLIEGO */
+.book-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+  background: rgba(13, 15, 29, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  user-select: none;
+}
+
+.book-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.book-chapter-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.book-rubric-badge {
+  display: inline-block;
+  padding: 3px 9px;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--cyan);
+  letter-spacing: 0.5px;
+}
+
+.book-header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.book-page-counter {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.book-page-counter b {
+  color: #fff;
+  font-size: 13px;
+}
+
+.book-close-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: var(--text-main);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  transition: all 200ms ease;
+}
+.book-close-btn:hover {
+  background: rgba(244, 63, 94, 0.15);
+  border-color: var(--coral);
+  color: #fff;
+  transform: translateY(-1px);
+}
+.book-close-btn kbd {
+  padding: 1px 5px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--gold-light);
+}
+
+/* CONTENEDOR DE LAS DOS PÁGINAS */
+.book-pages-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex: 1;
+  overflow-y: auto;
+  min-height: 480px;
+}
+
+/* PÁGINA INDIVIDUAL */
+.book-page {
+  position: relative;
+  padding: 38px 42px;
+  background: #121426;
+  overflow-y: auto;
+}
+
+.book-page-left {
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
+  background: radial-gradient(circle at 10% 20%, #151830 0%, #111324 100%);
+}
+
+.book-page-right {
+  background: radial-gradient(circle at 90% 20%, #14172e 0%, #0f1120 100%);
+}
+
+/* MARCA DE AGUA Y TEXTURA */
+.page-watermark {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.02);
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: 3px;
+}
+
+/* SELLO DE TINTA (STAMP BADGE) */
+.stamp-badge {
+  display: inline-block;
+  padding: 5px 14px;
+  border: 2px dashed rgba(245, 158, 11, 0.7);
+  color: var(--gold);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transform: rotate(-3deg);
+  margin-bottom: 24px;
+  box-shadow: inset 0 0 10px rgba(245, 158, 11, 0.1);
+  background: rgba(245, 158, 11, 0.05);
+}
+
+/* ENCABEZADOS DE PÁGINA */
+.page-category-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--coral);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.page-title {
+  font-family: var(--font-serif);
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.page-subtitle {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.book-divider {
+  height: 1px;
+  background: linear-gradient(to right, rgba(245, 158, 11, 0.4), transparent);
+  margin: 24px 0;
+}
+
+/* NOTAS MANUSCRITAS AL MARGEN (MARGINALIA) */
+.marginalia-box {
+  position: relative;
+  padding: 20px 22px;
+  background: rgba(255, 243, 205, 0.04);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.marginalia-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--gold-light);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.marginalia-text {
+  font-family: var(--font-hand);
+  font-size: 24px;
+  line-height: 1.25;
+  color: #fde68a;
+}
+
+/* CINTA ADHESIVA (WASHI TAPE) */
+.washi-tape {
+  position: absolute;
+  height: 16px;
+  background: rgba(253, 230, 138, 0.35);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2px);
+  z-index: 10;
+}
+.washi-tape-mini {
+  top: -8px;
+  left: 20px;
+  width: 60px;
+  transform: rotate(-2deg);
+}
+.washi-tape-top {
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(1deg);
+  width: 90px;
+}
+
+/* CITAS Y CUADROS DE TEXTO */
+.book-quote-card {
+  padding: 16px 20px;
+  border-left: 3px solid var(--gold);
+  background: rgba(0, 0, 0, 0.2);
+  margin-top: 16px;
+}
+.quote-label {
+  display: block;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.quote-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #e2dfd2;
+}
+
+/* PIE DE PÁGINA */
+.page-left-footer,
+.page-right-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 32px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+}
+.page-num-indicator {
+  font-weight: 700;
+  color: var(--gold);
+}
+
+/* --- DISEÑO DE PERSONA (POLAROID) --- */
+.persona-spread {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.polaroid-wrapper {
+  position: relative;
+  align-self: center;
+  width: 250px;
+}
+
+.polaroid-frame {
+  padding: 14px 14px 22px;
+  background: #fbfbf9;
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.5),
+    0 2px 6px rgba(0, 0, 0, 0.3);
+  transform: rotate(-1.5deg);
+  transition: transform 300ms ease;
+}
+.polaroid-frame:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+
+.polaroid-img {
+  width: 100%;
+  aspect-ratio: 4 / 4.6;
+  object-fit: cover;
+  object-position: center 20%;
+  background: #2b2b36;
+  border-radius: 2px;
+}
+
+.polaroid-placeholder {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #1b1d2e;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #a19dae;
+  text-align: center;
+  padding: 14px;
+}
+.polaroid-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+.polaroid-prompt {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--gold);
+}
+.polaroid-placeholder small {
+  font-size: 10px;
+  margin-top: 4px;
+  color: #7b788a;
+}
+
+.polaroid-caption {
+  margin-top: 14px;
+  text-align: center;
+  color: #111;
+}
+.polaroid-caption strong {
+  display: block;
+  font-family: var(--font-hand);
+  font-size: 26px;
+  line-height: 1;
+  color: #1a1a24;
+}
+.polaroid-caption span {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.persona-details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.persona-quote-card,
+.persona-lesson-card {
+  padding: 16px 20px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.field-tag {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.persona-quote-text {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  line-height: 1.5;
+  color: #fff;
+  font-style: italic;
+}
+
+.persona-lesson-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* --- DISEÑO DE CONCEPTO (SCRAPBOOK & CARDS) --- */
+.concepto-spread {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.concepto-intro {
+  font-size: 15px;
+  line-height: 1.65;
+  color: #dfdbed;
+}
+
+.concepto-items-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.concepto-card {
+  padding: 16px 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  transition: border-color 200ms ease;
+}
+.concepto-card:hover {
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+.concepto-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.concepto-card-icon {
+  font-size: 14px;
+}
+.concepto-card-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--cyan);
+}
+.concepto-card-title {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.concepto-card-detail {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.concepto-dossier {
+  padding: 18px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: 8px;
+}
+.dossier-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.dossier-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 12px;
+  font-size: 13px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.dossier-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.dossier-key {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--gold);
+}
+.dossier-value {
+  color: #dfdbed;
+}
+
+.evidencia-box {
+  padding: 14px 18px;
+  background: rgba(56, 189, 248, 0.06);
+  border-left: 3px solid var(--cyan);
+  border-radius: 0 6px 6px 0;
+}
+.evidencia-tag {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--cyan);
+  letter-spacing: 1.5px;
+  margin-bottom: 4px;
+}
+.evidencia-text {
+  font-size: 13px;
+  color: #b0d8f5;
+}
+.evidencia-poster-wrapper {
+  margin-top: 10px;
+  max-width: 320px;
+  max-height: 260px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0f1017;
+}
+.evidencia-poster-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.concepto-reflexion {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 16px 20px;
+  background: rgba(245, 158, 11, 0.07);
+  border-radius: 8px;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+.reflexion-spark {
+  font-size: 20px;
+}
+.reflexion-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #fde68a;
+}
+
+/* BARRA DE NAVEGACIÓN INFERIOR (FOOTER DEL LIBRO) */
+.book-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 28px;
+  background: rgba(13, 15, 29, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  user-select: none;
+}
+
+.nav-page-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  color: #fff;
+  transition: all 200ms ease;
+}
+.nav-page-btn:not(.disabled):hover {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+.nav-page-btn.disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.btn-arrow {
+  font-size: 18px;
+  color: var(--gold);
+}
+.btn-label {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+.next-btn .btn-label {
+  text-align: right;
+}
+.btn-label small {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+}
+.btn-label span {
+  font-size: 12px;
+  font-weight: 600;
+  max-width: 140px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.book-ribbon-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.ribbon-text {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+}
+.ribbon-dots {
+  display: flex;
+  gap: 6px;
+}
+.ribbon-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: all 200ms ease;
+  padding: 0;
+}
+.ribbon-dot:hover {
+  background: var(--gold-light);
+  transform: scale(1.3);
+}
+.ribbon-dot.active {
+  background: var(--gold);
+  box-shadow: 0 0 10px var(--gold);
+  transform: scale(1.35);
+}
+
+/* ANIMACIÓN DE ENTRADA */
+@keyframes book-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* RESPONSIVIDAD (TABLETS Y MÓVILES) */
+@media (max-width: 900px) {
+  .book-pages-container {
+    grid-template-columns: 1fr;
+  }
+  .book-spine {
+    display: none;
+  }
+  .book-page-left {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .page-title {
+    font-size: 26px;
+  }
+  .marginalia-text {
+    font-size: 20px;
+  }
+  .btn-label span {
+    display: none;
+  }
+}

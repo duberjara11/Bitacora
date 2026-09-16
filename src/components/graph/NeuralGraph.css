@@ -1,0 +1,9 @@
+.neural-graph {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.neural-graph canvas {
+  cursor: crosshair;
+}
